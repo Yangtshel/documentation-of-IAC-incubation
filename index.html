@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ site.title }}</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; margin: 0; color: #333; }
+        /* Your Nav Bar */
+        nav { background: #24292e; padding: 1rem; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ site.baseurl }}/">Home</a>
+        <a href="{{ site.baseurl }}/folder/file1.html">Doc 1</a>
+        <a href="{{ site.baseurl }}/folder/file2.html">Doc 2</a>
+    </nav>
+    <div class="container">
+        {{ content }}
+    </div>
+</body>
+</html>
