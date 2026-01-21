@@ -5,52 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documentation | Home</title>
     <style>
-        /* 1. Global Styles */
+        /* 1. Global Reset & Body */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             line-height: 1.6;
             color: #24292e;
             margin: 0;
             padding: 0;
-            background-color: #f6f8fa; /* Light grey background */
+            background-color: #f6f8fa;
         }
 
-        /* 2. Navigation Bar */
+        /* 2. Navigation Bar (Top) */
         nav {
-            background-color: #24292e; /* Dark GitHub-style header */
+            background-color: #24292e;
             padding: 1rem 0;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         nav a {
-            color: #ffffff;
+            color: #ffffff; /* White text for Nav */
             margin: 0 15px;
             text-decoration: none;
             font-weight: 500;
-            font-size: 1.1rem;
         }
         nav a:hover {
-            color: #58a6ff; /* Light blue hover effect */
+            color: #58a6ff; /* Light blue on hover */
         }
 
-        /* 3. The "Anti-Edge" Container */
+        /* 3. The Anti-Edge Container */
         .content-wrapper {
-            max-width: 850px;      /* Stops text from stretching too far */
-            margin: 40px auto;     /* Centers the box and adds top/bottom space */
-            padding: 0 30px;       /* This ensures text NEVER touches the edge */
-            background-color: #ffffff; /* White box for content */
+            max-width: 850px;      
+            margin: 40px auto;     
+            padding: 0 30px;       /* Keeps text away from screen edges */
+            background-color: #ffffff;
             border: 1px solid #d0d7de;
             border-radius: 6px;
         }
 
-        /* 4. Content Styling */
         .inner-content {
-            padding: 40px 20px;    /* Extra space inside the white box */
+            padding: 40px 20px;
         }
+
+        /* 4. CLEAN LINK STYLING (No Dirty Blue) */
+        .inner-content a {
+            color: #24292e;         /* Same color as text (Charcoal) */
+            text-decoration: underline;
+            text-decoration-color: #d0d7de; /* Light grey underline */
+            transition: 0.2s;       /* Smooth color change */
+        }
+
+        .inner-content a:hover {
+            color: #0969da;         /* Turns Professional Blue only on hover */
+            text-decoration-color: #0969da;
+        }
+
+        .inner-content a:visited {
+            color: #24292e;         /* Prevents that purple "visited" color */
+        }
+
         h1 { border-bottom: 1px solid #d0d7de; padding-bottom: 10px; }
-        code { background: #f1f1f1; padding: 2px 5px; border-radius: 3px; }
         
-        /* Mobile adjustment */
         @media (max-width: 600px) {
             .content-wrapper { margin: 10px; border: none; }
             nav a { display: block; margin: 10px 0; }
@@ -63,10 +76,10 @@
     <nav>
         <a href="index.html">Home</a>
         <!-- Ensure these file paths match your folder structure -->
-        <a href="your-folder/file1.html">Assignment 1</a>
-        <a href="your-folder/file2.html">Assignment 2</a>
+        <a href="https://yangtshel.github.io/documentation-of-IAC-incubation/Week_1/navigationday.html">Week 1</a>
+        <a href="/Week_2/navigationday.html">Week 2</a>
     </nav>
-
+    
     <!-- The Wrapper that keeps text centered and away from edges -->
     <div class="content-wrapper">
         <div class="inner-content">
