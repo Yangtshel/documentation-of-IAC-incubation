@@ -1,9 +1,7 @@
 ---
 layout: default
-title: Getting Started
-nav_order: 2
-parent: Home
 ---
+
 
 
 # Understanding Local AI (1st day of incubation)
