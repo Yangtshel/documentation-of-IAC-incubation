@@ -1,35 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ site.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | Home</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.6; margin: 0; color: #333; }
-        /* Your Nav Bar */
-        nav { background: #24292e; padding: 1rem; text-align: center; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        /* 1. Global Styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa; /* Light grey background */
+        }
+
+        /* 2. Navigation Bar */
+        nav {
+            background-color: #24292e; /* Dark GitHub-style header */
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        nav a {
+            color: #ffffff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        nav a:hover {
+            color: #58a6ff; /* Light blue hover effect */
+        }
+
+        /* 3. The "Anti-Edge" Container */
+        .content-wrapper {
+            max-width: 850px;      /* Stops text from stretching too far */
+            margin: 40px auto;     /* Centers the box and adds top/bottom space */
+            padding: 0 30px;       /* This ensures text NEVER touches the edge */
+            background-color: #ffffff; /* White box for content */
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+        }
+
+        /* 4. Content Styling */
+        .inner-content {
+            padding: 40px 20px;    /* Extra space inside the white box */
+        }
+        h1 { border-bottom: 1px solid #d0d7de; padding-bottom: 10px; }
+        code { background: #f1f1f1; padding: 2px 5px; border-radius: 3px; }
+        
+        /* Mobile adjustment */
+        @media (max-width: 600px) {
+            .content-wrapper { margin: 10px; border: none; }
+            nav a { display: block; margin: 10px 0; }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Top Navigation -->
     <nav>
-        <a href="{{ site.baseurl }}/">Home</a>
-        <a href="{{ site.baseurl }}/folder/file1.html">Doc 1</a>
-        <a href="{{ site.baseurl }}/folder/file2.html">Doc 2</a>
+        <a href="index.html">Home</a>
+        <!-- Ensure these file paths match your folder structure -->
+        <a href="your-folder/file1.html">Assignment 1</a>
+        <a href="your-folder/file2.html">Assignment 2</a>
     </nav>
 
-    <h1 id="documentation-of-iac-incubation">documentation-of-IAC-incubation</h1>
-    <h2 id="the-learning-of-one-month-at-the-thimphu-tech-park-incubating-under-the-information-access-center-iac-">the learning of one month at the Thimphu tech park, incubating under the Information Access Center (IAC)</h2>
-    <p>This repository is to document my learnings during the one month incubation period at the IAC. This is a day by day documentation on the month one learning period.</p>
-    <p>The documentation would mainly be for proper understanding, citations and future replicability. I myself will document this the entire months learnings with the upmost depth as possible.</p>
-    <p>The mile stone that I hope to achieve with this incubation is to properly understand the workings of ai and be able to finetune an preexisting ai model to suit my requirements.</p>
-    <p>My initial roadmap was to create and train a dully functional Dzongkha LLM, though after learning more and understanding the vast complexities it composed of, I decided against it.</p>
-    <p>Currently, I plan on learning how to fine tune a preexisting ai model on the data I provide to be able to respond to my questions with the knowledge that I provide. I plan on using the Retrieval Augmented Generation pipline (RAG) which is where you provide the knowledge and data to an preexisting ai model. Through this it is possible for the ai to answer questions that is not originally in its data base as it first read the documents before providing the answer to our questions.</p>
-    <p>With RAG, my first aim is to understand the workflow and  backend workings of this method. For this I decided to train the llama3.1:8b (3.1 is the model version, and the 8b indicates the model has a total of 8 billion parameters) on the Bhutan baccalaureate learning process pdf. </p>
-    <p>Then The last step would be to plan and create a road map on how to start fine tuning a dzongkha LLM.</p>
+    <!-- The Wrapper that keeps text centered and away from edges -->
+    <div class="content-wrapper">
+        <div class="inner-content">
+            <h1>Project Documentation</h1>
+            <p>Welcome to my documentation site. This page is now formatted with a max-width container, so the text remains easy to read and doesn't touch the edges of your browser window.</p>
+            
+            <h3>Overview</h3>
+            <p>You can use this space to describe your project. All the text you type here will stay perfectly aligned in the center of the screen.</p>
+            
+            <h3>Assignments</h3>
+            <ul>
+                <li><a href="your-folder/file1.html">Week 1: Project Management</a></li>
+                <li><a href="your-folder/file2.html">Week 2: Computer Aided Design</a></li>
+            </ul>
+        </div>
+    </div>
 
 </body>
-
-
-
 </html>
