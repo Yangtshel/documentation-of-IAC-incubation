@@ -1,3 +1,11 @@
+---
+layout: default
+title: Home
+nav_order: 1
+description: "Your site landing page"
+---
+
+
 # documentation-of-IAC-incubation
 ## the learning of one month at the Thimphu tech park, incubating under the Information Access Center (IAC)
 

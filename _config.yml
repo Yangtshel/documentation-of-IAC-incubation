@@ -1,10 +1,9 @@
-# Documentation Site Settings
-title: Your Project Name
-description: A short description of your project.
+remote_theme: just-the-docs/just-the-docs
 
-# Theme Selection (Slate)
-remote_theme: pages-themes/slate@v0.2.0
+# Optional: Customize the title and description
+title: My Project Docs
+description: A complete guide to my repository.
 
-# Required plugin for themes
+# Required for remote themes
 plugins:
   - jekyll-remote-theme
