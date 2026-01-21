@@ -1,9 +1,10 @@
-remote_theme: just-the-docs/just-the-docs
-
-# Optional: Customize the title and description
-title: My Project Docs
-description: A complete guide to my repository.
-
-# Required for remote themes
-plugins:
-  - jekyll-remote-theme
+site_name: My Fab Academy Journey
+theme:
+  name: material
+  features:
+    - navigation.tabs  # Adds the top nav bar you asked for
+nav:
+  - Home: index.md
+  - Assignments:
+      - Week 1: folder/week01.md
+      - Week 2: folder/week02.md
