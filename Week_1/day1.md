@@ -1,3 +1,9 @@
+---
+layout: default
+title: Home
+---
+
+
 # Understanding Local AI (1st day of incubation)
 ## Ollama
 on the first day of the incubation, we were given a presentation on the IAC and then what it does, going over how it has leveraged peoples and interest in AI development and provided them with the facilities needed to train their own AI models. Then we were introduced to two AI and software developers that would help us in our incubation and learning. With both their help, I properly understood the limitations and the amount of resources that is required to fully tain your own LLM form scratch. What they recommended was rather than train your AI from scratch, use an preexisting ai and then fine tune it to suit your needs.They also mentioned using the Rag pipeline which would be the most viable option for training our ai model.
