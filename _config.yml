@@ -1,0 +1,11 @@
+# Documentation Site Settings
+title: Your Project Name
+description: A short description of your documentation.
+
+# Theme Selection
+remote_theme: pages-themes/hacker@v0.2.0
+
+# Required plugin for remote themes
+plugins:
+  - jekyll-remote-theme
+ 
