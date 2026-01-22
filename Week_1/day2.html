@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | Home</title>
+    <style>
+        /* 1. Global Reset & Body */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+        }
+
+        /* 2. Navigation Bar (Top) */
+        nav {
+            background-color: #24292e;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        nav a {
+            color: #ffffff; /* White text for Nav */
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        nav a:hover {
+            color: #58a6ff; /* Light blue on hover */
+        }
+
+        /* 3. The Anti-Edge Container */
+        .content-wrapper {
+            max-width: 850px;      
+            margin: 40px auto;     
+            padding: 0 30px;       /* Keeps text away from screen edges */
+            background-color: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+        }
+
+        .inner-content {
+            padding: 40px 20px;
+        }
+
+        /* 4. CLEAN LINK STYLING (No Dirty Blue) */
+        .inner-content a {
+            color: #24292e;         /* Same color as text (Charcoal) */
+            text-decoration: underline;
+            text-decoration-color: #d0d7de; /* Light grey underline */
+            transition: 0.2s;       /* Smooth color change */
+        }
+
+        .inner-content a:hover {
+            color: #0969da;         /* Turns Professional Blue only on hover */
+            text-decoration-color: #0969da;
+        }
+
+        .inner-content a:visited {
+            color: #24292e;         /* Prevents that purple "visited" color */
+        }
+
+        h1 { border-bottom: 1px solid #d0d7de; padding-bottom: 10px; }
+        
+        @media (max-width: 600px) {
+            .content-wrapper { margin: 10px; border: none; }
+            nav a { display: block; margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation -->
+    <nav>
+        <a href="https://yangtshel.github.io/documentation-of-IAC-incubation/">Home</a>
+        <!-- Ensure these file paths match your folder structure -->
+        <a href="https://yangtshel.github.io/documentation-of-IAC-incubation/Week_1/navigationday.html">Week 1</a>
+        <a href="/Week_2/navigationday.html">Week 2</a>
+    </nav>
+    
+    <!-- The Wrapper that keeps text centered and away from edges -->
+    <div class="content-wrapper">
+        <div class="inner-content">
+            <h1 id="first-fintuning-2nd-day-">First fintuning (2nd day)</h1>
+            <h2 id="learning-finetuning">Learning Finetuning</h2>
+            <p>The second day started of with high hopes. The previous day having been really productive and myself being able to learn a lot. I started the second day by learning a bit more about ollama and its capabilities through the help of the several youtube videos mentioned bellow.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/WxYC9-hBM_g?si=EOrMkYs0Ztgm9Zow" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/_6SlPLNEpzQ?si=ZJkejaMbwFuG1W3T" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/GWB9ApTPTv4?si=G_xusqr-kmRVpPql" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+            <p>Through the videos I understood the full usage of Ollama. After that I decided that I needed to start and learn how to finetune AI. I refered to Several videos on how to fine tune ai.</p>
+            <h2 id="finetuning-and-how-it-works-">Finetuning and how it works.</h2>
+            <p>Fine-tuning is a machine learning technique where a pre-trained model (a &quot;base model&quot; that already understands general patterns) is further trained on a smaller, specialized dataset to adapt it for a specific task or domain. It is a form of transfer learning, where general knowledge is repurposed for niche needs. </p>
+            <h3 id="the-core-process">The Core Process</h3>
+            <ol>
+            <li><p>Selection of a Pre-trained Model: You start with a model already trained on a massive, general dataset (e.g., a language model trained on the internet or an image model trained on millions of photos).</p>
+            </li>
+            <li><p>Dataset Preparation: You gather a specialized dataset (often labeled) that reflects your specific use case, such as medical records, legal documents, or customer support logs.</p>
+            </li>
+            <li><p>Adjusting Parameters: Unlike pre-training from scratch, which starts with random weights, fine-tuning begins with the pre-trained weights. During training, these weights are slightly adjusted to minimize errors on the new data.</p>
+            </li>
+            <li><p>Learning Rate Control: A much lower learning rate is typically used compared to initial training. This ensures the model makes subtle adjustments without erasing or &quot;destroying&quot; its foundational knowledge. 
+            Common Fine-Tuning Strategies</p>
+            </li>
+            </ol>
+            <h3 id="techniques-range-from-updating-the-entire-model-to-modifying-only-tiny-parts-of-it-">Techniques range from updating the entire model to modifying only tiny parts of it:</h3>
+            <ol>
+            <li><p>Full Fine-Tuning: Every single weight in the model is updated. This offers the highest accuracy but is extremely resource-intensive and expensive.</p>
+            </li>
+            <li><p>Layer Freezing: You &quot;freeze&quot; the early layers of the model (which capture general features like edges in images or grammar in text) and only train the final layers. This preserves foundational knowledge and saves computation time.</p>
+            </li>
+            <li><p>Parameter-Efficient Fine-Tuning (PEFT): Modern methods like LoRA (Low-Rank Adaptation) and QLoRA add small, trainable modules to the model while keeping the billions of original parameters frozen. This allows large models to be fine-tuned on standard consumer hardware.</p>
+            </li>
+            <li><p>Instruction Tuning: Specifically for LLMs, the model is trained on examples of how to follow specific commands (e.g., &quot;Summarize this...&quot;) rather than just predicting the next word. </p>
+            </li>
+            </ol>
+            <h2 id="instruction-tuning">Instruction Tuning</h2>
+            <p>the technique I chose to use was the instruction tuning method. I chose this method as it seem the most logical and simplest to conduct. Then when I started to get into learning how to fine tune AI, I stumbled upon LoRA and Unsloth.</p>
+            <h3 id="1-what-is-lora-">1. What is LoRA?</h3>
+            <p>LoRA (Low-Rank Adaptation) is a technique that makes fine-tuning massive models possible on consumer GPUs. </p>
+            <p>The Problem: Traditional fine-tuning requires updating all billions of parameters in a model, which uses massive amounts of VRAM.</p>
+            <p>The Solution: LoRA &quot;freezes&quot; the original model weights and only trains two small, thin matrices (called adapters) added to the model&#39;s layers.</p>
+            <p>Efficiency: You typically only train ~1% of the total weights, drastically reducing memory needs while achieving nearly the same accuracy as full fine-tuning. </p>
+            <h3 id="2-what-is-unsloth-">2. What is Unsloth?</h3>
+            <p>Unsloth is an open-source framework that optimizes the fine-tuning process by rewriting the underlying mathematical engine of the model. </p>
+            <p>Speed: It makes training 2–5x faster (and up to 30x faster in specialized environments) compared to standard libraries like Hugging Face.</p>
+            <p>Memory Savings: It reduces VRAM usage by 30% to 90%, allowing you to train large models like Llama 3.1 70B on hardware with less than 48GB of VRAM.</p>
+            <p>0% Accuracy Loss: Unlike many optimization tools, Unsloth uses exact mathematical derivations (not approximations) to achieve its speed. </p>
+            <p>using both I plan on fully fine tuning my very first ai.</p>
+            <h2 id="reality">Reality</h2>
+            <p>turns out that even with all of this, my finetuning wont officially begin as due to the fact that my laptop/cpu just doesnt have enough computing power. I have to think of an alternative tomorrow.</p>
+
+            
+            
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+# First fintuning (2nd day)
+## Learning Finetuning
+The second day started of with high hopes. The previous day having been really productive and myself being able to learn a lot. I started the second day by learning a bit more about ollama and its capabilities through the help of the several youtube videos mentioned bellow.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WxYC9-hBM_g?si=EOrMkYs0Ztgm9Zow" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_6SlPLNEpzQ?si=ZJkejaMbwFuG1W3T" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GWB9ApTPTv4?si=G_xusqr-kmRVpPql" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Through the videos I understood the full usage of Ollama. After that I decided that I needed to start and learn how to finetune AI. I refered to Several videos on how to fine tune ai.
+
+## Finetuning and how it works.
+
+Fine-tuning is a machine learning technique where a pre-trained model (a "base model" that already understands general patterns) is further trained on a smaller, specialized dataset to adapt it for a specific task or domain. It is a form of transfer learning, where general knowledge is repurposed for niche needs. 
+
+### The Core Process
+
+1. Selection of a Pre-trained Model: You start with a model already trained on a massive, general dataset (e.g., a language model trained on the internet or an image model trained on millions of photos).
+
+2. Dataset Preparation: You gather a specialized dataset (often labeled) that reflects your specific use case, such as medical records, legal documents, or customer support logs.
+
+3. Adjusting Parameters: Unlike pre-training from scratch, which starts with random weights, fine-tuning begins with the pre-trained weights. During training, these weights are slightly adjusted to minimize errors on the new data.
+
+4. Learning Rate Control: A much lower learning rate is typically used compared to initial training. This ensures the model makes subtle adjustments without erasing or "destroying" its foundational knowledge. 
+Common Fine-Tuning Strategies
+
+### Techniques range from updating the entire model to modifying only tiny parts of it: 
+
+1. Full Fine-Tuning: Every single weight in the model is updated. This offers the highest accuracy but is extremely resource-intensive and expensive.
+
+2. Layer Freezing: You "freeze" the early layers of the model (which capture general features like edges in images or grammar in text) and only train the final layers. This preserves foundational knowledge and saves computation time.
+
+3. Parameter-Efficient Fine-Tuning (PEFT): Modern methods like LoRA (Low-Rank Adaptation) and QLoRA add small, trainable modules to the model while keeping the billions of original parameters frozen. This allows large models to be fine-tuned on standard consumer hardware.
+
+3. Instruction Tuning: Specifically for LLMs, the model is trained on examples of how to follow specific commands (e.g., "Summarize this...") rather than just predicting the next word. 
+
+## Instruction Tuning  
+
+the technique I chose to use was the instruction tuning method. I chose this method as it seem the most logical and simplest to conduct. Then when I started to get into learning how to fine tune AI, I stumbled upon LoRA and Unsloth.
+
+### 1. What is LoRA?
+LoRA (Low-Rank Adaptation) is a technique that makes fine-tuning massive models possible on consumer GPUs. 
+
+The Problem: Traditional fine-tuning requires updating all billions of parameters in a model, which uses massive amounts of VRAM.
+
+The Solution: LoRA "freezes" the original model weights and only trains two small, thin matrices (called adapters) added to the model's layers.
+
+Efficiency: You typically only train ~1% of the total weights, drastically reducing memory needs while achieving nearly the same accuracy as full fine-tuning. 
+
+### 2. What is Unsloth?
+
+Unsloth is an open-source framework that optimizes the fine-tuning process by rewriting the underlying mathematical engine of the model. 
+
+Speed: It makes training 2–5x faster (and up to 30x faster in specialized environments) compared to standard libraries like Hugging Face.
+
+Memory Savings: It reduces VRAM usage by 30% to 90%, allowing you to train large models like Llama 3.1 70B on hardware with less than 48GB of VRAM.
+
+0% Accuracy Loss: Unlike many optimization tools, Unsloth uses exact mathematical derivations (not approximations) to achieve its speed. 
+
+using both I plan on fully fine tuning my very first ai.
+
+## Reality
+turns out that even with all of this, my finetuning wont officially begin as due to the fact that my laptop/cpu just doesnt have enough computing power. I have to think of an alternative tomorrow.
