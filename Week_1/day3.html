@@ -205,11 +205,11 @@
             </code></pre>
             <p>The above code block handles the final conversion and export of my fine-tuned model by using Unsloth to save it in the GGUF format, specifically using Q4_K_M quantization to ensure it is small enough to run on hardware with very limited RAM. Once the model is converted into this single, optimized .gguf file, the code uses the Google Colab file utility to trigger a direct download of the model to my local machine. It includes a safety check to verify the existence of the file which is usually automatically renamed with its quantization tag and provides a fallback directory listing to help you identify the exact filename if the default path differs.</p>
             <p>Also the reason for the file format to be in the GGUF format is so that I can load it into my ollama and run it to see if the model is functional or not. After the downloading is finished. I simply load it on powershell with ollama to have my first conversation with.</p>
-            <video src="https://imgur.com/a/9BGGDSd" width="100%" controls></video>
 
 
 
 
+            <iframe width="560" height="315" src="https://imgur.com/a/9BGGDSd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 
