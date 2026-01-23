@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | Home</title>
+    <style>
+        /* 1. Global Reset & Body */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+        }
+
+        /* 2. Navigation Bar (Top) */
+        nav {
+            background-color: #24292e;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        nav a {
+            color: #ffffff; /* White text for Nav */
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        nav a:hover {
+            color: #58a6ff; /* Light blue on hover */
+        }
+
+        /* 3. The Anti-Edge Container */
+        .content-wrapper {
+            max-width: 850px;      
+            margin: 40px auto;     
+            padding: 0 30px;       /* Keeps text away from screen edges */
+            background-color: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+        }
+
+        .inner-content {
+            padding: 40px 20px;
+        }
+
+        /* 4. CLEAN LINK STYLING (No Dirty Blue) */
+        .inner-content a {
+            color: #24292e;         /* Same color as text (Charcoal) */
+            text-decoration: underline;
+            text-decoration-color: #d0d7de; /* Light grey underline */
+            transition: 0.2s;       /* Smooth color change */
+        }
+
+        .inner-content a:hover {
+            color: #0969da;         /* Turns Professional Blue only on hover */
+            text-decoration-color: #0969da;
+        }
+
+        .inner-content a:visited {
+            color: #24292e;         /* Prevents that purple "visited" color */
+        }
+
+        h1 { border-bottom: 1px solid #d0d7de; padding-bottom: 10px; }
+        
+        @media (max-width: 600px) {
+            .content-wrapper { margin: 10px; border: none; }
+            nav a { display: block; margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation -->
+    <nav>
+        <a href="https://yangtshel.github.io/documentation-of-IAC-incubation/">Home</a>
+        <!-- Ensure these file paths match your folder structure -->
+        <a href="https://yangtshel.github.io/documentation-of-IAC-incubation/Week_1/navigationday.html">Week 1</a>
+        <a href="/Week_2/navigationday.html">Week 2</a>
+    </nav>
+    
+    <!-- The Wrapper that keeps text centered and away from edges -->
+    <div class="content-wrapper">
+        <div class="inner-content">
+            <h1 id="first-fintuning-begins-3rd-day-">First fintuning Begins (3rd Day)</h1>
+            <h2 id="search-for-efficiency">Search for efficiency</h2>
+            <p>Firstly I had to confront the big problem in front of me. How would I be able to confront the problem of not having enough RAM? My cpu just would be able to handle the work load that is present during the process of finetuning. Even with the use of Unsloth and LoRA, My laptop just would have the computing power to handle it. Therefore I needed to find ways around this problem Through leveraging the resources that are available online. </p>
+            <p>To begin with, I downloaded a model that would be small and efficient enough to be run on my device. The mnodel that I chose was the Gemma3:1b. This model was approximately 780 Mb and requires around 800 MB of RAM. After getting an efficient AI model, I had to find a way to train my model without running in computing issues.</p>
+            <h2 id="google-colab-">Google Colab:</h2>
+            <p>After searching the web, I found one alternative. I could use &quot;Google Colab&quot;. Google colab is a part of Google workspace that is sort of a google alternative to Jupyter notebook. In it we can make several cells that can be all contain either python codes or markdown comments. Then you can run each cell, replacing the need for several different python files as all of those can be insides the cells of the overall notebook. Though the feature that caught my interest was that google colab also provides free gpu hours to run each cell. Meaning to run the code inside the cells that are too heavy for my laptop, I can instead run it on a virtual GPU(T4) that would be able to handle my fintuning project.</p>
+            <pre><code class="lang-python"><span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
+            <span class="hljs-keyword">import</span> os
+
+            <span class="hljs-comment"># This pulls the token you just saved in the sidebar</span>
+            os.environ[<span class="hljs-string">"HF_TOKEN"</span>] = userdata.get(<span class="hljs-string">'HF_TOKEN'</span>)
+            </code></pre>
+            <p>I first start by pulling a hugging face token for me to be able to access its ai library.</p>
+            <pre><code class="lang-python">!pip <span class="hljs-keyword">install</span> --upgrade pip
+            !pip <span class="hljs-keyword">install</span> <span class="hljs-string">"unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"</span>
+            !pip <span class="hljs-keyword">install</span> --no-deps <span class="hljs-string">"xformers&lt;0.0.29"</span> <span class="hljs-string">"trl&lt;0.9.0"</span> peft accelerate bitsandbytes
+            </code></pre>
+            <p>Then after that I needed to install the required libraries to start with my finetuning process.</p>
+            <pre><code><span class="hljs-comment"># Import torch FIRST before Unsloth</span>
+            <span class="hljs-built_in">import</span> torch
+            from datasets <span class="hljs-built_in">import</span> load_dataset
+
+            <span class="hljs-comment"># Now import Unsloth</span>
+            try:
+                from unsloth <span class="hljs-built_in">import</span> FastLanguageModel
+            except OSError:
+                <span class="hljs-comment"># If it still fails, this forced reload usually fixes it</span>
+                <span class="hljs-built_in">import</span> sys
+                <span class="hljs-built_in">import</span> importlib
+                importlib.reload(sys.modules['inspect'])
+                from unsloth <span class="hljs-built_in">import</span> FastLanguageModel
+
+            <span class="hljs-comment"># Load the model</span>
+            model, <span class="hljs-attr">tokenizer</span> = FastLanguageModel.from_pretrained(
+                <span class="hljs-attr">model_name</span> = <span class="hljs-string">"unsloth/gemma-3-1b-it"</span>,
+                <span class="hljs-attr">max_seq_length</span> = <span class="hljs-number">1024</span>,
+                <span class="hljs-attr">load_in_4bit</span> = True,
+            )
+
+            <span class="hljs-attr">model</span> = FastLanguageModel.get_peft_model(
+                model,
+                <span class="hljs-attr">r</span> = <span class="hljs-number">16</span>,
+                <span class="hljs-attr">target_modules</span> = [<span class="hljs-string">"q_proj"</span>, <span class="hljs-string">"k_proj"</span>, <span class="hljs-string">"v_proj"</span>, <span class="hljs-string">"o_proj"</span>, <span class="hljs-string">"gate_proj"</span>, <span class="hljs-string">"up_proj"</span>, <span class="hljs-string">"down_proj"</span>],
+                <span class="hljs-attr">lora_alpha</span> = <span class="hljs-number">16</span>,
+                <span class="hljs-attr">lora_dropout</span> = <span class="hljs-number">0</span>,
+                <span class="hljs-attr">bias</span> = <span class="hljs-string">"none"</span>,
+            )
+            print(<span class="hljs-string">"Model loaded successfully!"</span>)
+            </code></pre><p>This code initializes a highly optimized environment for memory-efficient fine-tuning of the Gemma 3 (1B) model using the Unsloth library. It begins with a robust import sequence that resolves common environment bugs before loading the 1B-parameter, instruction-tuned variant of Google&#39;s Gemma 3 in 4-bit quantization, which reduces VRAM requirements by approximately 70% to enable training on consumer-grade hardware. Finally, it applies Parameter-Efficient Fine-Tuning (PEFT) via LoRA (Low-Rank Adaptation), configuring 16-rank adapters across all major model modules (like query, value, and feed-forward layers) to allow for fast, task-specific retraining without modifying the original base model&#39;s weights. </p>
+            <pre><code class="lang-python">from datasets <span class="hljs-built_in">import</span> load_dataset
+            <span class="hljs-built_in">import</span> os
+
+            <span class="hljs-comment"># 1. Load your local file</span>
+            <span class="hljs-comment"># Ensure the filename matches what you uploaded</span>
+            <span class="hljs-attr">data_file</span> = <span class="hljs-string">"mydataset.jsonl"</span>
+
+            <span class="hljs-keyword">if</span> not os.path.exists(data_file):
+                print(f<span class="hljs-string">"Error: {data_file} not found in the sidebar!"</span>)
+            <span class="hljs-keyword">else</span>:
+                <span class="hljs-comment"># Load dataset from the local JSONL file</span>
+                <span class="hljs-attr">dataset</span> = load_dataset(<span class="hljs-string">"json"</span>, <span class="hljs-attr">data_files=data_file,</span> <span class="hljs-attr">split="train")</span>
+
+                <span class="hljs-comment"># 2. Format for Gemma 3</span>
+                def formatting_prompts_func(examples):
+                    <span class="hljs-attr">instructions</span> = examples[<span class="hljs-string">"instruction"</span>]
+                    <span class="hljs-attr">outputs</span>      = examples[<span class="hljs-string">"response"</span>]
+                    <span class="hljs-attr">texts</span> = []
+                    for instruction, output <span class="hljs-keyword">in</span> zip(instructions, outputs):
+                        <span class="hljs-comment"># Gemma 3 specific chat template</span>
+                        <span class="hljs-attr">text</span> = f<span class="hljs-string">"&lt;start_of_turn&gt;user\n{instruction}&lt;end_of_turn&gt;\n&lt;start_of_turn&gt;model\n{output}&lt;end_of_turn&gt;"</span>
+                        texts.append(text)
+                    return { <span class="hljs-string">"text"</span> : texts, }
+
+                <span class="hljs-attr">dataset</span> = dataset.<span class="hljs-built_in">map</span>(formatting_prompts_func, <span class="hljs-attr">batched</span> = True)
+                print(<span class="hljs-string">"Dataset successfully loaded and formatted!"</span>)
+            </code></pre>
+            <p>This code uses the Hugging Face datasets library to load my local JSONL file and transform it into a structured format compatible with Gemma 3 fine-tuning. It first verifies the file&#39;s existence, then applies a mapping function that wraps raw instructions and responses in specific chat template tags—such as <start_of_turn>user and <start_of_turn>model—to ensure the model correctly learns the boundaries between human prompts and assistant answers. By processing the data in batches, it efficiently creates a new text column containing the exact string format required for the model&#39;s training phase.</p>
+            <p>That string format is in the format of the Instruction and response format. It is required as to train the model, you have to make it be able to correctly guess and generate a response based on the instruction. Then it checks its generated response with the actual response and changes its parameters bit by bit to make it generate responses that are more like the original response.</p>
+            <pre><code class="lang-python">from trl <span class="hljs-built_in">import</span> SFTTrainer
+            from transformers <span class="hljs-built_in">import</span> TrainingArguments
+
+            <span class="hljs-attr">trainer</span> = SFTTrainer(
+                <span class="hljs-attr">model</span> = model,
+                <span class="hljs-attr">tokenizer</span> = tokenizer,
+                <span class="hljs-attr">train_dataset</span> = dataset,
+                <span class="hljs-attr">dataset_text_field</span> = <span class="hljs-string">"text"</span>,
+                <span class="hljs-attr">max_seq_length</span> = <span class="hljs-number">2048</span>,
+                <span class="hljs-attr">args</span> = TrainingArguments(
+                    <span class="hljs-attr">per_device_train_batch_size</span> = <span class="hljs-number">2</span>,
+                    <span class="hljs-attr">gradient_accumulation_steps</span> = <span class="hljs-number">4</span>,
+                    <span class="hljs-attr">warmup_steps</span> = <span class="hljs-number">5</span>,
+                    <span class="hljs-attr">max_steps</span> = <span class="hljs-number">60</span>, <span class="hljs-comment"># Start small (approx 5-10 mins) to test</span>
+                    <span class="hljs-attr">learning_rate</span> = <span class="hljs-number">2</span>e-<span class="hljs-number">4</span>,
+                    <span class="hljs-attr">fp16</span> = not torch.cuda.is_bf16_supported(),
+                    <span class="hljs-attr">bf16</span> = torch.cuda.is_bf16_supported(),
+                    <span class="hljs-attr">logging_steps</span> = <span class="hljs-number">1</span>,
+                    <span class="hljs-attr">output_dir</span> = <span class="hljs-string">"outputs"</span>,
+                ),
+            )
+            </code></pre>
+            <p>The above code initializes a Supervised Fine-Tuning (SFT) Trainer from the trl library to efficiently train a language model using the specific &quot;text&quot; column of your formatted dataset. This is done as it configures the training process with a 2048-token context window and optimizes memory usage through gradient accumulation and mixed-precision settings (fp16 or bf16) based on your hardware&#39;s capability. This setup is designed for a short, controlled &quot;smoke test&quot; of 60 steps, using a standard learning rate of (2\times 10^{-4}) and frequent logging to the &quot;outputs&quot; directory so you can monitor the model&#39;s progress in real-time before committing to a full-scale training run. </p>
+            <p>This took around roughly 10 minutes before the training was done.</p>
+            <pre><code class="lang-python"><span class="hljs-comment"># 1. Save the model in GGUF format (Q4_K_M is best for your 1.6GB RAM laptop)</span>
+            model.save_pretrained_gguf(<span class="hljs-string">"my_finetuned_gemma"</span>, tokenizer, <span class="hljs-attr">quantization_method</span> = <span class="hljs-string">"q4_k_m"</span>)
+
+            <span class="hljs-comment"># 2. Download the file from Colab to your laptop</span>
+            from google.colab <span class="hljs-built_in">import</span> files
+            <span class="hljs-built_in">import</span> os
+
+            <span class="hljs-comment"># Find the file (Unsloth usually names it with the quantization tag)</span>
+            <span class="hljs-attr">file_path</span> = <span class="hljs-string">"my_finetuned_gemma-unsloth.Q4_K_M.gguf"</span>
+
+            <span class="hljs-keyword">if</span> os.path.exists(file_path):
+                files.download(file_path)
+            <span class="hljs-keyword">else</span>:
+                print(<span class="hljs-string">"Looking for file..."</span>)
+                <span class="hljs-comment"># List files to help you find the exact name if different</span>
+                !ls *.gguf
+            </code></pre>
+            <p>The above code block handles the final conversion and export of my fine-tuned model by using Unsloth to save it in the GGUF format, specifically using Q4_K_M quantization to ensure it is small enough to run on hardware with very limited RAM. Once the model is converted into this single, optimized .gguf file, the code uses the Google Colab file utility to trigger a direct download of the model to my local machine. It includes a safety check to verify the existence of the file which is usually automatically renamed with its quantization tag and provides a fallback directory listing to help you identify the exact filename if the default path differs.</p>
+            <p>Also the reason for the file format to be in the GGUF format is so that I can load it into my ollama and run it to see if the model is functional or not. After the downloading is finished. I simply load it on powershell with ollama to have my first conversation with.</p>
+            <video src="https://imgur.com/a/9BGGDSd" width="100%" controls></video>
+
+
+
+
+
+
+
+
+
+            
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
